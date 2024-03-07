@@ -1,0 +1,33 @@
+section .data
+msg db "sum: " ;Variabile msg
+len equ $ - msg  
+
+section .bss
+sum resb 1 
+
+section .text
+global _start
+
+_start:
+mov	eax, 3
+mov	ebx, 5
+
+add	eax, ebx ;Somma effettiva
+add	eax, '0'	
+mov	[sum], eax	
+
+mov	ecx, msg ;Stampa msg
+mov	edx, len
+mov	ebx, 1
+mov	eax, 4
+int	80h
+
+mov	ecx, sum ;Stampa sum
+mov	edx, 1
+mov	ebx, 1
+mov	eax, 4
+int	80h
+
+mov	eax, 1
+mov	ebx, 0
+int	80h

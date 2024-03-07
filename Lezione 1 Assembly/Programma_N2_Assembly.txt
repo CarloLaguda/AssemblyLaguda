@@ -1,0 +1,33 @@
+section .data
+msg db "sub: " ;Variabile msg
+len equ $ - msg  
+
+section .bss
+subb resb 1 
+
+section .text
+global _start
+
+_start:
+mov	eax, 7
+mov	ebx, 4
+
+sub	eax, ebx ;Sottrazione effettiva
+add	eax, '0'	
+mov	[subb], eax	
+
+mov	ecx, msg ;Stampa msg
+mov	edx, len
+mov	ebx, 1
+mov	eax, 4
+int	80h
+
+mov	ecx, subb ;Stampa subb
+mov	edx, 1
+mov	ebx, 1
+mov	eax, 4
+int	80h
+
+mov	eax, 1
+mov	ebx, 0
+int	80h
